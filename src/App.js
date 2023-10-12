@@ -7,13 +7,17 @@ const average = (arr) =>
 const KEY = '48b46f54';
 
 export default function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedId, setSelectedID] = useState(null);
-
+  // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(() => {
+      const storedValue = localStorage.getItem('watched');
+      return JSON.parse(storedValue);
+  });
+	
   function handleSelection(id) {
        setSelectedID(selectedId => id === selectedId ? null : id);
   }
@@ -23,13 +27,17 @@ export default function App() {
   }
   
   function handleAddWatched(movie) {
-	  setWatched(watched => [...watched, movie])
+	  setWatched(watched => [...watched, movie]);
   }
   
   function handleDeleteWatched(id) {
       setWatched(watched => watched.filter(el => el.imdbID !== id))
   }
-
+  
+  useEffect(() => {
+	  localStorage.setItem('watched', JSON.stringify(watched));
+  }, [watched]);
+  
   useEffect(() => {
       const controller = new AbortController(); // if new request coming cancel previous request (when typing in search field)
       
