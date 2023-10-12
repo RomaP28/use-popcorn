@@ -7,7 +7,7 @@ const average = (arr) =>
 const KEY = '48b46f54';
 
 export default function App() {
-  const [query, setQuery] = useState("inception");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -62,6 +62,8 @@ export default function App() {
           setError('');
           return
       }
+	
+	  handleCloseMovie();
       fetchMovies();
       
       return function () {
@@ -235,8 +237,22 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
       onAddWatched(newWatchedMovie);
       onCloseMovie();
   }
+	
+	
+  useEffect(() => {
+      const callBack = e => {
+		  if(e.code === 'Escape') {
+			  onCloseMovie();
+		  }};
+      
+      document.addEventListener('keydown', callBack);
+      
+      return function() {
+          document.removeEventListener('keydown', callBack)
+      }
+ }, [onCloseMovie]);
 
-  useEffect(function(){
+  useEffect(() => {
     async function getMovieDetails() {
 	  setLoading(true);
       const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`);
@@ -247,13 +263,12 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     getMovieDetails();
   }, [selectedId]);
   
-  const cleanup = useEffect(function(){
+  useEffect(() => {
       if (!title) return;
       document.title = `Movie | ${title}`;
       
       return function(){
 	      document.title = `usePopcorn`;
-	      console.log(`cleanup for movie: ${title}`)
       }
   }, [title]);
 
