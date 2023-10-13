@@ -10,8 +10,8 @@ https://main--amazing-tulumba-718ca2.netlify.app/
 
 ## To run the project locally:
 
-### 1. In the root folder install server dependencies:
+### 1. In the root folder install dependencies:
 `npm install`
 
-### 2. Run both Express & React:
+### 2. Run application:
 `npm run start`
