@@ -386,4 +386,14 @@ body {
   .list li{
     padding: 0.6rem 2.2rem;
   }
+
+  .details section {
+    padding: 1rem;
+  }
+  .details-overview {
+    padding: 1.4rem 1rem;
+  }
+  .details img {
+    width: 36%;
+  }
 }
