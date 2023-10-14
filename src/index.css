@@ -347,6 +347,7 @@ body {
   .main{
     flex-direction: column-reverse;
     align-items: center;
+    justify-content: flex-end;
   }
 
   .box{
@@ -366,9 +367,16 @@ body {
 }
 
 @media(max-width: 500px) and (orientation: portrait) {
+  .main{
+    height: calc(100vh - 12.2rem - 3 * 2.4rem);
+    margin-top: 1.4rem;
+    gap: 1.4rem;
+  }
+
   .nav-bar {
     grid-template-columns: .5fr 3fr;
-    padding: 0 2.2rem;
+    padding: 0 1.2rem;
+    height: 6.2rem;
   }
 
   .num-results{
@@ -383,8 +391,18 @@ body {
     padding: 1.2rem 2.2rem .8rem 2.2rem;
   }
 
+  .summary div,
+  .summary h2{
+    font-size: 1.2rem;
+  }
+
   .list li{
-    padding: 0.6rem 2.2rem;
+    padding: 0.1rem 1.2rem;
+    font-size: 1.3rem;
+  }
+
+  .list h3 {
+    font-size: 1.5rem;
   }
 
   .details section {
@@ -395,5 +413,9 @@ body {
   }
   .details img {
     width: 36%;
+  }
+
+  .btn-delete {
+    right: 1rem;
   }
 }
